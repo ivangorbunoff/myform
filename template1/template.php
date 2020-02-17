@@ -68,11 +68,7 @@ if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
                     ознакомлены, полностью согласны и&nbsp;принимаете условия &laquo;Согласия на&nbsp;обработку персональных
                     данных&raquo;.
                 </div>
-                <button class="form-button contact-form__bottom-button"  data-success="Отправлено" <!-- эта кнопка не отправляет форму)) -->
-                        data-error="Ошибка отправки">
-                    <div class="form-button__title"><?=$arResult["arForm"]["BUTTON"]?></div>
-                </button>
-                <input type="submit" name="web_form_submit" /><!-- стандартная кнопка которая была тут, отправляет форму -->
+                <input class="form-button contact-form__bottom-button" type="submit" name="web_form_submit" value="<?= $arResult["arForm"]["BUTTON"] ?>"/>
             </div>
         </form>
     </div>
