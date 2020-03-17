@@ -4,19 +4,17 @@ $this->setFrameMode(true);
 ?>
 
 <div class="news-list">
-    <?foreach($arResult["ITEMS"] as $arItem):?>
-        <?
-        $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-        $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
-        ?>
-        <p class="news-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
-            <b><?echo $arItem["NAME"]?></b><br/>
-            <?echo $arItem["PREVIEW_TEXT"];?>
-            <?foreach($arItem["FIELDS"] as $code=>$value):?>
-                <small>
-                    <?=GetMessage("IBLOCK_FIELD_".$code)?>:&nbsp;<?=$value;?>
-                </small><br />
-            <?endforeach;?>
-        </p>
+    <?foreach($arResult["ITEMS"] as$key1=>$arItem):?>
+        <?foreach($arItem as$key2=>$value):?>
+                <p class="news-item" id="<?=$this->GetEditAreaId($arItem['ID']);?>">
+                    <b><?echo $arItem[$key2]["NAME"]?></b><br/>
+                    <?echo $arItem[$key2]["PREVIEW_TEXT"];?>
+                    <?foreach($arItem[$key2]["FIELDS"] as $code=>$value1):?>
+                        <small>
+                            <?=GetMessage("IBLOCK_FIELD_".$code)?>:&nbsp;<?=$value1;?>
+                        </small><br />
+                    <?endforeach;?>
+                </p>
+        <?endforeach;?>
     <?endforeach;?>
 </div>
