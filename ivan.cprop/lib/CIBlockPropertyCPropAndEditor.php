@@ -244,7 +244,9 @@ class CIBlockPropertyCPropAndEditor
         );
         $html = ob_get_contents();
         $pos = stripos($html, $rename.'" w');
-        $html = substr_replace ($html,$name,$pos-(strlen($code)+$var),strlen($rename)); //заменяем имя без скобок на имя со скобками
+        $pos -= strlen($code)+$var;//если не работает, можно попробовать закоментить эту строку и раскоментить строку ниже
+        //$pos -= strlen($rename)+11;
+        $html = substr_replace ($html,$name,$pos,strlen($rename));
         ob_end_clean();
 
         $result .= '<tr>
