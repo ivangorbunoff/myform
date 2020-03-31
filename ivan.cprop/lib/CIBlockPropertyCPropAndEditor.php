@@ -229,7 +229,10 @@ class CIBlockPropertyCPropAndEditor
         ob_start();
         $result = '';
         $name = $strHTMLControlName['VALUE'].'['.$code.']';   // имя со скобками
+        $name = str_replace(':', '', $name);
         $rename = preg_replace("/[^a-zA-Z0-9_:\.]/is", "", $name);   // имя с подчеркиваниями
+        $var = explode('[', $name);
+        $var = strlen($var[1])+strlen($var[2])-5;
         $name_type = substr($name, 0, -1);
 
         CFileMan::AddHTMLEditorFrame(
@@ -241,7 +244,7 @@ class CIBlockPropertyCPropAndEditor
         );
         $html = ob_get_contents();
         $pos = stripos($html, $rename.'" w');
-        $html = substr_replace ($html,$name,$pos-(strlen($code)+1),strlen($rename)); //заменяем имя без скобок на имя со скобками
+        $html = substr_replace ($html,$name,$pos-(strlen($code)+$var),strlen($rename)); //заменяем имя без скобок на имя со скобками
         ob_end_clean();
 
         $result .= '<tr>
