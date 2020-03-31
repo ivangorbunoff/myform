@@ -226,7 +226,6 @@ class CIBlockPropertyCPropAndEditor
     public static function showHTML($code, $title, $arValue, $strHTMLControlName)
     {
         $val = $arValue['VALUE'][$code];
-        ob_start();
         $result = '';
         $name = $strHTMLControlName['VALUE'].'['.$code.']';   // имя со скобками
         $name = str_replace(':', '', $name);
@@ -235,6 +234,7 @@ class CIBlockPropertyCPropAndEditor
         $var = strlen($var[1])+strlen($var[2])-5;
         $name_type = substr($name, 0, -1);
 
+        ob_start();
         CFileMan::AddHTMLEditorFrame(
             $name,
             htmlspecialcharsEx($val),
@@ -243,9 +243,10 @@ class CIBlockPropertyCPropAndEditor
             array('height' => 80)
         );
         $html = ob_get_contents();
-        $pos = stripos($html, $rename.'" w');
-        $pos -= strlen($code)+$var;//если не работает, можно попробовать закоментить эту строку и раскоментить строку ниже
-        //$pos -= strlen($rename)+11;
+        $pos = stripos($html, $rename.'" w'); // если не работает, можно попробовать закоментить эту -
+        $pos -= strlen($code)+$var; // - и эту строку
+        //$pos = stripos($html, '" id="bxed_'.$rename.'" w'); // а эту -
+        //$pos -= strlen($rename); // - и эту раскоментить)))
         $html = substr_replace ($html,$name,$pos,strlen($rename));
         ob_end_clean();
 
@@ -260,10 +261,10 @@ class CIBlockPropertyCPropAndEditor
     private static function showString($code, $title, $arValue, $strHTMLControlName)
     {
         $result = '';
-
+        $strHTMLControlName['VALUE'] = str_replace(':', '', $strHTMLControlName['VALUE']);
         $v = !empty($arValue['VALUE'][$code]) ? $arValue['VALUE'][$code] : '';
         $result .= '<tr>
-                    <td align="right">'.$title.': </td><!--в title "введите строку"-->
+                    <td align="right">'.$title.': </td>
                     <td><input type="text" value="'.$v.'" name="'.$strHTMLControlName['VALUE'].'['.$code.']"/></td>
                 </tr>';
 
@@ -273,7 +274,7 @@ class CIBlockPropertyCPropAndEditor
     private static function showFile($code, $title, $arValue, $strHTMLControlName)
     {
         $result = '';
-
+        $strHTMLControlName['VALUE'] = str_replace(':', '', $strHTMLControlName['VALUE']);
         if(!empty($arValue['VALUE'][$code]) && !is_array($arValue['VALUE'][$code])){
             $fileId = $arValue['VALUE'][$code];
         }
@@ -330,7 +331,7 @@ class CIBlockPropertyCPropAndEditor
     public static function showTextarea($code, $title, $arValue, $strHTMLControlName)
     {
         $result = '';
-
+        $strHTMLControlName['VALUE'] = str_replace(':', '', $strHTMLControlName['VALUE']);
         $v = !empty($arValue['VALUE'][$code]) ? $arValue['VALUE'][$code] : '';
         $result .= '<tr>
                     <td align="right" valign="top">'.$title.': </td>
@@ -343,7 +344,7 @@ class CIBlockPropertyCPropAndEditor
     public static function showDate($code, $title, $arValue, $strHTMLControlName)
     {
         $result = '';
-
+        $strHTMLControlName['VALUE'] = str_replace(':', '', $strHTMLControlName['VALUE']);
         $v = !empty($arValue['VALUE'][$code]) ? $arValue['VALUE'][$code] : '';
         $result .= '<tr>
                         <td align="right" valign="top">'.$title.': </td>
@@ -368,7 +369,7 @@ class CIBlockPropertyCPropAndEditor
     public static function showBindElement($code, $title, $arValue, $strHTMLControlName)
     {
         $result = '';
-
+        $strHTMLControlName['VALUE'] = str_replace(':', '', $strHTMLControlName['VALUE']);
         $v = !empty($arValue['VALUE'][$code]) ? $arValue['VALUE'][$code] : '';
 
         $elUrl = '';
