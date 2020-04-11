@@ -16,7 +16,7 @@ $func = new ClassForm;//чтобы воспользоваться функцие
             <tbody>
             <?php foreach($arResult as $elem): ?><!-- отображаем список всех файлов на диске (кроме папок) -->
                 <tr>
-                    <td width="100px"><a href="<?=$elem['preview']?>"><img src="<?=$elem['preview']?>"/><a/></td>
+                    <td width="100px"><img width="150" src="<?=$elem['preview']?>"/></td>
                     <td width="200px"><a class="linkstyle" href="<?=$elem['docviewer']?>"><?=$elem['name']?></a></td>
                     <td width="50px"><input type="checkbox" name="pathfordelcop[]" value="<?=$elem['path']?>" /></td>
                     <td><?=$func->getPathDirecories($elem['path'])?></td>
@@ -40,10 +40,9 @@ $func = new ClassForm;//чтобы воспользоваться функцие
             </tbody>
         </table>
     </form>
-    Чтобы загрузить файл на Яндекс.Диск, укажите путь к файлу в поле ниже.<br/>
-    Если такой файл уже существует, он будет перезаписан.<br/><br/>
-    <form action="<?=POST_FORM_ACTION_URI?>" name="add" method="POST">
-        <input class="mac" type="text" name="pathtofile" placeholder="<?=$arParams['placeholder']?>"/><br/><br/>
+    <br/>Загрузить файл (если такой файл уже существует, он будет перезаписан) <br/><br/>
+    <form action="<?=POST_FORM_ACTION_URI?>" name="add" method="POST" enctype='multipart/form-data'>
+        <input class="btn" type="file" name="pathtofile" /><br/>
         <input class="btn" type="submit" name="buttonadd" value="Добавить файл" />
     </form>
 </div>

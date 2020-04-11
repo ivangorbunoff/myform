@@ -17,16 +17,6 @@
     transition: all 0.3s ease-out;
     text-decoration: none;
 }
-.mac {
-    display: block;
-    border: none;
-    border-radius: 20px;
-    padding: 5px 8px;
-    color: #333;
-    box-shadow:
-            inset 0 2px 0 rgba(0,0,0,.2),
-            0 0 4px rgba(0,0,0,0.1);
-}
 .btn{
     display: inline-block;
     margin: 15px;
